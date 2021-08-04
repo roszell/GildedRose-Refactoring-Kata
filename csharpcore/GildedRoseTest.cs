@@ -41,5 +41,14 @@ namespace csharpcore
             app.UpdateQuality();
             Items[0].Quality.Should().Be(50);
         }
+
+        [Fact]
+        public void AgedBrieIncreasesInQuality()
+        {
+            IList<Item> Items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 1, Quality = 1 } };
+            GildedRose app = new GildedRose(Items);
+            app.UpdateQuality();
+            Items[0].Quality.Should().Be(2);
+        }
     }
 }
