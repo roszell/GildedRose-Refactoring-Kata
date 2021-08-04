@@ -15,24 +15,17 @@ namespace csharpcore
             Items[0].SellIn.Should().Be(0);
         }
 
-        [Fact]
-        public void QualityIsReducedByOneEachDay()
+        [Theory]
+        [InlineData(1, 1, 0)]
+        [InlineData(1, 0, 0)]
+        public void NormalItemQualityReducesCorrectly(int sellIn, int quality, int expectedQuality)
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 1, Quality = 1 } };
+            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = sellIn, Quality = quality } };
             GildedRose app = new GildedRose(Items);
             app.UpdateQuality();
-            Items[0].Quality.Should().Be(0);
+            Items[0].Quality.Should().Be(expectedQuality);
         }
         
-        [Fact]
-        public void QualityNeverDropsBelowZero()
-        {
-            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 1, Quality = 0 } };
-            GildedRose app = new GildedRose(Items);
-            app.UpdateQuality();
-            Items[0].Quality.Should().Be(0);
-        }
-
         [Fact]
         public void MaxQualityShouldNotExceedFifty()
         {
