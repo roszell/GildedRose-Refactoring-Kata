@@ -44,6 +44,12 @@ namespace csharpcore
             app.UpdateQuality();
             Items[0].Quality.Should().Be(2);
         }
+
+        [Fact]
+        public void Sulfuras()
+        {
+            true.Should().BeFalse();
+        }
         
         [Theory]
         [InlineData(11, 1, 2)]
