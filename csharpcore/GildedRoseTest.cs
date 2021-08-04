@@ -52,8 +52,11 @@ namespace csharpcore
         }
         
         [Theory]
+        [InlineData(11, 1, 2)]
         [InlineData(10, 1, 3)]
-        public void BackstagePassesIncreaseInQualityByTwoWhenTenDaysOrLess(int sellIn, int quality, int expectedQuality)
+        [InlineData(5, 1, 4)]
+        [InlineData(0, 10, 0)]
+        public void BackstagePassesQualityUpdatesCorrectly(int sellIn, int quality, int expectedQuality)
         {
             IList<Item> Items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = quality } };
             GildedRose app = new GildedRose(Items);
