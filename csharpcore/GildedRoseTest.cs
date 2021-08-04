@@ -51,13 +51,14 @@ namespace csharpcore
             Items[0].Quality.Should().Be(2);
         }
         
-        [Fact]
-        public void BackstagePassesIncreaseInQualityByTwoWhenTenDaysOrLess()
+        [Theory]
+        [InlineData(10, 1, 3)]
+        public void BackstagePassesIncreaseInQualityByTwoWhenTenDaysOrLess(int sellIn, int quality, int expectedQuality)
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 1 } };
+            IList<Item> Items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = sellIn, Quality = quality } };
             GildedRose app = new GildedRose(Items);
             app.UpdateQuality();
-            Items[0].Quality.Should().Be(3);
+            Items[0].Quality.Should().Be(expectedQuality);
         }
     }
 }
