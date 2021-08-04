@@ -18,6 +18,7 @@ namespace csharpcore
         [Theory]
         [InlineData(1, 1, 0)]
         [InlineData(1, 0, 0)]
+        [InlineData(0, 3, 1)]
         public void NormalItemQualityReducesCorrectly(int sellIn, int quality, int expectedQuality)
         {
             IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = sellIn, Quality = quality } };
